@@ -1,6 +1,5 @@
 package com.dev.azeem.thirukural
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,7 +27,6 @@ import com.dev.azeem.thirukural.components.ThirukuralListScreen
 import com.dev.azeem.thirukural.components.getDataFromJson
 import com.dev.azeem.thirukural.data.Details
 import com.dev.azeem.thirukural.data.Kural
-import com.dev.azeem.thirukural.ui.theme.Green40
 import com.dev.azeem.thirukural.ui.theme.Green80
 import com.dev.azeem.thirukural.ui.theme.ThirukuralTheme
 import kotlinx.serialization.Serializable
@@ -140,7 +138,7 @@ data class ThirukuralDetailScreen(
     val number: Int
 )
 
-@Preview(showSystemUi = true, uiMode = UI_MODE_NIGHT_YES)
+@Preview(showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     MainScreen()
