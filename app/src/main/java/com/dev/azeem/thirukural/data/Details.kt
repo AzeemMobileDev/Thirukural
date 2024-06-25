@@ -19,6 +19,10 @@ data class Details(
                 val chapterGroupDetail: List<ChapterGroupDetail>
             ){
                 data class ChapterGroupDetail(
+                    val name: String,
+                    val translation: String,
+                    val transliteration: String,
+                    val number: Int,
                     val chapters: Chapters
                 ) {
                     data class Chapters(

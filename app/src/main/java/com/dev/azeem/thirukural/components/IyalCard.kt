@@ -30,20 +30,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.dev.azeem.thirukural.ThirukuralScreen
+import com.dev.azeem.thirukural.AthikaramScreen
 import com.dev.azeem.thirukural.data.Details
 import com.dev.azeem.thirukural.ui.theme.Green80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AthikaramCard(
-    sectionDetail: Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail.Chapters.ChaptersDetails,
+fun IyalCard(
+    sectionDetail: Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail,
     paalName: String,
-    iyalName: String,
-    athikaramName: String,
-    athikaramNumber: String,
-    start: Int,
-    end: Int,
+    paalNumber: Int,
     navController: NavHostController
 ) {
     Card(
@@ -54,7 +50,16 @@ fun AthikaramCard(
         elevation = CardDefaults.cardElevation(5.dp),
         shape = MaterialTheme.shapes.medium,
         border = BorderStroke(1.dp, Green80),
-        onClick = { navController.navigate(ThirukuralScreen(paalName, iyalName, athikaramName, athikaramNumber, start, end)) }
+        onClick = {
+            navController.navigate(
+                AthikaramScreen(
+                    "${sectionDetail.name} / ${sectionDetail.transliteration}",
+                    sectionDetail.number,
+                    paalName,
+                    paalNumber
+                )
+            )
+        }
     ) {
         Row(
             Modifier
@@ -119,7 +124,7 @@ fun AthikaramCard(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun AthikaramPreview() {
+fun IyalPreview() {
     Card(
         modifier = Modifier
             .fillMaxWidth()

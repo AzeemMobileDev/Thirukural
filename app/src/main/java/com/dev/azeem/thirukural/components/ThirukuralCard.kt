@@ -30,11 +30,17 @@ import androidx.navigation.NavHostController
 import com.dev.azeem.thirukural.ThirukuralDetailScreen
 import com.dev.azeem.thirukural.data.Thirukural
 import com.dev.azeem.thirukural.ui.theme.Green80
-import com.dev.azeem.thirukural.ui.theme.Green40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ThirukuralCard(thirukural: Thirukural, navController: NavHostController) {
+fun ThirukuralCard(
+    paalName: String,
+    iyalName: String,
+    athikaramName: String,
+    athikaramNumber: String,
+    thirukural: Thirukural,
+    navController: NavHostController
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,6 +52,10 @@ fun ThirukuralCard(thirukural: Thirukural, navController: NavHostController) {
         onClick = {
             navController.navigate(
                 ThirukuralDetailScreen(
+                    paalName,
+                    iyalName,
+                    athikaramName,
+                    "அதிகாரம் - $athikaramNumber",
                     "குறள் - ${thirukural.number}",
                     thirukural.number
                 )

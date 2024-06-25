@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -21,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.dev.azeem.thirukural.components.AthikaramListScreen
+import com.dev.azeem.thirukural.components.IyalListScreen
 import com.dev.azeem.thirukural.components.PaalListScreen
 import com.dev.azeem.thirukural.components.ThirukuralDetailsScreen
 import com.dev.azeem.thirukural.components.ThirukuralListScreen
@@ -84,10 +86,22 @@ fun KuralNavHost(
                 modifier = modifier
             )
         }
+        composable<IyalScreen> {
+            val args = it.toRoute<IyalScreen>()
+            IyalListScreen(
+                mDetailList,
+                args.name,
+                args.number,
+                navController,
+                modifier = modifier
+            )
+        }
         composable<AthikaramScreen> {
             val args = it.toRoute<AthikaramScreen>()
             AthikaramListScreen(
                 mDetailList,
+                args.iyalName,
+                args.iyalNumber,
                 args.name,
                 args.number,
                 navController,
@@ -98,7 +112,10 @@ fun KuralNavHost(
             val args = it.toRoute<ThirukuralScreen>()
             ThirukuralListScreen(
                 thirukuralList,
+                args.paalName,
+                args.iyalName,
                 args.athikaramName,
+                args.athikaramNumber,
                 args.start,
                 args.end,
                 navController,
@@ -109,6 +126,10 @@ fun KuralNavHost(
             val args = it.toRoute<ThirukuralDetailScreen>()
             ThirukuralDetailsScreen(
                 thirukuralList,
+                args.paalName,
+                args.iyalName,
+                args.athikaramName,
+                args.athikaramNumber,
                 args.kuralName,
                 args.number,
                 modifier = modifier
@@ -121,24 +142,43 @@ fun KuralNavHost(
 object PaalScreen
 
 @Serializable
+data class IyalScreen(
+    val name: String,
+    val number: Int
+)
+
+@Serializable
 data class AthikaramScreen(
+    val iyalName: String,
+    val iyalNumber: Int,
     val name: String,
     val number: Int
 )
 
 @Serializable
 data class ThirukuralScreen(
+    val paalName: String,
+    val iyalName: String,
     val athikaramName: String,
-    val start: Int, val end: Int
+    val athikaramNumber: String,
+    val start: Int,
+    val end: Int
 )
 
 @Serializable
 data class ThirukuralDetailScreen(
+    val paalName: String,
+    val iyalName: String,
+    val athikaramName: String,
+    val athikaramNumber: String,
     val kuralName: String,
     val number: Int
 )
 
-@Preview(showSystemUi = true)
+@Preview(showSystemUi = true, device = Devices.PIXEL_7_PRO)
+@Preview(showSystemUi = true, device = Devices.PIXEL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_5)
+@Preview(showSystemUi = true, device = "spec:id=reference_tablet,shape=Normal,width=800,height=1280,unit=dp,dpi=240")
 @Composable
 fun GreetingPreview() {
     MainScreen()

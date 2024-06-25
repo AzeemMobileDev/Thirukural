@@ -1,7 +1,6 @@
 package com.dev.azeem.thirukural.components
 
 import android.content.res.Configuration
-import android.provider.CalendarContract.Colors
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.dev.azeem.thirukural.AthikaramScreen
+import com.dev.azeem.thirukural.IyalScreen
 import com.dev.azeem.thirukural.MainScreen
 import com.dev.azeem.thirukural.R
 import com.dev.azeem.thirukural.data.Details
@@ -42,7 +41,14 @@ fun PaalCard(
             .padding(8.dp),
         colors = CardDefaults.cardColors(Green80),
         shape = MaterialTheme.shapes.medium,
-        onClick = { navController.navigate(AthikaramScreen(sectionDetail.name, sectionDetail.number)) }
+        onClick = {
+            navController.navigate(
+                IyalScreen(
+                    "${sectionDetail.name} / ${sectionDetail.transliteration}",
+                    sectionDetail.number
+                )
+            )
+        }
     ) {
         Column(
             Modifier
@@ -50,34 +56,16 @@ fun PaalCard(
                 .padding(8.dp)
         ) {
             Text(
-                text = sectionDetail.name,
-                modifier = Modifier
-                    .padding(
-                        3.dp
-                    )
-                    .align(Alignment.CenterHorizontally),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = sectionDetail.transliteration,
-                fontSize = 16.sp,
+                text = "${sectionDetail.name} / ${sectionDetail.transliteration}",
                 modifier = Modifier
                     .padding(3.dp)
                     .align(Alignment.CenterHorizontally),
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.athikarangal, athikaramSize),
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .padding(3.dp)
-                    .align(Alignment.CenterHorizontally),
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = stringResource(R.string.chapters, athikaramSize),
                 fontSize = 16.sp,
                 modifier = Modifier
                     .padding(3.dp)

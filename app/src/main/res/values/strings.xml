@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Thirukural</string>
     <string name="thirukural">திருக்குறள் / Thirukural</string>
-    <string name="athikarangal">%1$s அதிகாரங்கள்</string>
-    <string name="chapters">%1$s Chapters</string>
+    <string name="athikarangal">%1$s அதிகாரங்கள் / Chapters</string>
 </resources>

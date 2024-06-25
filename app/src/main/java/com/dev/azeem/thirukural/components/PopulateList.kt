@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -68,8 +71,62 @@ fun PaalListScreen(
 }
 
 @Composable
+fun IyalListScreen(
+    mList: Details,
+    paalName: String,
+    paalNumber: Int,
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    val _mList = mList.section.detail.filter { it.number == paalNumber }
+    val detailsList = arrayListOf<Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail>()
+    for (i in _mList) {
+        detailsList.addAll(i.chapterGroup.chapterGroupDetail)
+    }
+    Column(modifier) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.background(Green80)
+        ) {
+            Text(
+                text = paalName,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(8.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Text(
+            text = "இயல்கள்",
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 16.dp, start = 8.dp, end = 8.dp),
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            contentPadding = PaddingValues(16.dp)
+        ) {
+            items(detailsList) { item ->
+                IyalCard(item, paalName, paalNumber, navController)
+            }
+        }
+    }
+}
+
+@Composable
 fun AthikaramListScreen(
     mList: Details,
+    iyalName: String,
+    iyalNumber: Int,
     paalName: String,
     paalNumber: Int,
     navController: NavHostController,
@@ -82,14 +139,17 @@ fun AthikaramListScreen(
     for (i in _mList) {
         detailsList.addAll(i.chapterGroup.chapterGroupDetail)
     }
-    for (item in detailsList) {
+    val _detailsList = detailsList.filter { it.number == iyalNumber }
+    for (item in _detailsList) {
         chapDetailsList.addAll(item.chapters.chaptersDetails)
     }
     Column(modifier) {
-        Box(contentAlignment = Alignment.Center,
-            modifier = Modifier.background(Green80)) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.background(Green80)
+        ) {
             Text(
-                text = paalName,
+                text = iyalName,
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
@@ -99,6 +159,16 @@ fun AthikaramListScreen(
                 fontWeight = FontWeight.Bold
             )
         }
+        Text(
+            text = "அதிகாரங்கள்",
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 16.dp, start = 8.dp, end = 8.dp),
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -106,10 +176,20 @@ fun AthikaramListScreen(
             contentPadding = PaddingValues(16.dp)
         ) {
             items(chapDetailsList) { item ->
-                val athikaram = "${item.number}. ${item.name} / ${item.transliteration}"
+                val athikaram = "${item.name} / ${item.transliteration}"
+                val athikaramNumber = "${item.number}"
                 val start = item.start
                 val end = item.end
-                AthikaramCard(item, athikaram, start, end, navController)
+                AthikaramCard(
+                    item,
+                    paalName,
+                    iyalName,
+                    athikaram,
+                    athikaramNumber,
+                    start,
+                    end,
+                    navController
+                )
             }
         }
     }
@@ -118,7 +198,10 @@ fun AthikaramListScreen(
 @Composable
 fun ThirukuralListScreen(
     mList: Kural,
+    paalName: String,
+    iyalName: String,
     athikaramName: String,
+    athikaramNumber: String,
     start: Int,
     end: Int,
     navController: NavHostController,
@@ -127,8 +210,10 @@ fun ThirukuralListScreen(
     val filteredList = mList.kural.subList(start - 1, end)
 
     Column(modifier) {
-        Box(contentAlignment = Alignment.Center,
-            modifier = Modifier.background(Green80)) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.background(Green80)
+        ) {
             Text(
                 text = athikaramName,
                 modifier = Modifier
@@ -140,6 +225,16 @@ fun ThirukuralListScreen(
                 fontWeight = FontWeight.Bold
             )
         }
+        Text(
+            text = "திருக்குறள்கள்",
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 16.dp, start = 8.dp, end = 8.dp),
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -147,7 +242,14 @@ fun ThirukuralListScreen(
             contentPadding = PaddingValues(16.dp)
         ) {
             items(filteredList) { item ->
-                ThirukuralCard(item, navController)
+                ThirukuralCard(
+                    paalName,
+                    iyalName,
+                    athikaramName,
+                    athikaramNumber,
+                    item,
+                    navController
+                )
             }
         }
     }
@@ -156,6 +258,10 @@ fun ThirukuralListScreen(
 @Composable
 fun ThirukuralDetailsScreen(
     mList: Kural,
+    paalName: String,
+    iyalName: String,
+    athikaramName: String,
+    athikaramNumber: String,
     kuralName: String,
     number: Int,
     modifier: Modifier = Modifier
@@ -163,12 +269,26 @@ fun ThirukuralDetailsScreen(
     val filteredList = mList.kural.filter { it.number == number }
 
     Column(modifier) {
-        Box(contentAlignment = Alignment.Center,
-            modifier = Modifier.background(Green80)) {
+        Row(
+            Modifier
+                .background(Green80)
+                .wrapContentHeight()
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Text(
                 text = kuralName,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(start = 16.dp, top = 8.dp, end = 8.dp, bottom = 8.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = athikaramNumber,
+                modifier = Modifier
                     .wrapContentHeight()
                     .padding(8.dp),
                 textAlign = TextAlign.Center,
@@ -176,6 +296,16 @@ fun ThirukuralDetailsScreen(
                 fontWeight = FontWeight.Bold
             )
         }
+        Text(
+            text = "குறள் பால்: $paalName\nகுறள் இயல்: $iyalName\nகுறள் அதிகாரம்: $athikaramName",
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 16.dp, start = 16.dp, end = 8.dp),
+            textAlign = TextAlign.Start,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Medium
+        )
         ThirukuralDetailsCard(filteredList.first())
     }
 }

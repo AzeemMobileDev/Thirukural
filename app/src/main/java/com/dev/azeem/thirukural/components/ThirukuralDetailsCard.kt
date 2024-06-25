@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,11 +58,13 @@ fun ThirukuralDetailsCard(thirukural: Thirukural) {
                     modifier = Modifier.padding(
                         3.dp
                     ),
-                    fontSize = 13.sp
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = thirukural.lineNo2,
                     fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(3.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -192,11 +195,13 @@ fun ThirukuralDetailsCardPreview() {
                     modifier = Modifier.padding(
                         3.dp
                     ),
-                    fontSize = 12.sp
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = "thirukural.lineNo2",
                     fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(3.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
