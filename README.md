@@ -14,8 +14,8 @@
 - **UI Toolkit**: Jetpack Compose
 
 ## Screenshots
-|                        Phone                         |                       Foldable                       |                         Tablet                          |
-|:----------------------------------------------------:|:----------------------------------------------------:|:-------------------------------------------------------:|
-| <img src=assets/phone_1.png width=412 height=915 />  |  <img src=assets/fold_1.png width=421 height=701 />  |  <img src=assets/tablet_1.png width=800 height=1280 />  |
-| <img src=assets/phone_2.png width=412 height=915 />  |  <img src=assets/fold_2.png width=842 height=701 />  |  <img src=assets/tablet_2.png width=1280 height=800 />  |
-| <img src=assets/phone_3.png width=412 height=915 />  |  <img src=assets/fold_3.png width=842 height=701 />  |  <img src=assets/tablet_3.png width=1280 height=800 />  |
+|                       Phone                        |                     Foldable                      |                        Tablet                        |
+|:--------------------------------------------------:|:-------------------------------------------------:|:----------------------------------------------------:|
+|           <img src=assets/phone_1.png />           |           <img src=assets/fold_1.png />           |           <img src=assets/tablet_1.png />            |
+|           <img src=assets/phone_2.png />           |           <img src=assets/fold_2.png />           |           <img src=assets/tablet_2.png />            |
+|           <img src=assets/phone_3.png />           |           <img src=assets/fold_3.png />           |           <img src=assets/tablet_3.png />            |
