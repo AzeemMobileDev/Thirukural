@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,14 +18,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.dev.azeem.thirukural.data.Details
+import com.dev.azeem.thirukural.data.FavListViewModel
 import com.dev.azeem.thirukural.data.Kural
+import com.dev.azeem.thirukural.data.Thirukural
+import com.dev.azeem.thirukural.data.UiState
 import com.dev.azeem.thirukural.ui.theme.Green80
+import com.dev.azeem.thirukural.ui.theme.LightBrown
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -47,25 +53,25 @@ inline fun <reified T> parseJsonToModel(jsonString: String): T {
 
 @Composable
 fun PaalListScreen(
-    mList: Details,
-    navController: NavHostController,
-    modifier: Modifier = Modifier
+    mList: Details, navController: NavHostController, modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        contentPadding = PaddingValues(16.dp)
-    ) {
-        items(mList.section.detail) { mListItem ->
-            val detailsList =
-                arrayListOf<Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail>()
-            val chapDetailsList =
-                arrayListOf<Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail.Chapters.ChaptersDetails>()
-            detailsList.addAll(mListItem.chapterGroup.chapterGroupDetail)
-            for (item in detailsList) {
-                chapDetailsList.addAll(item.chapters.chaptersDetails)
+    Column(modifier) {
+        LazyColumn(
+            modifier = modifier.weight(1f),
+            verticalArrangement = Arrangement.Top,
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp)
+        ) {
+            items(mList.section.detail) { mListItem ->
+                val detailsList =
+                    arrayListOf<Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail>()
+                val chapDetailsList =
+                    arrayListOf<Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail.Chapters.ChaptersDetails>()
+                detailsList.addAll(mListItem.chapterGroup.chapterGroupDetail)
+                for (item in detailsList) {
+                    chapDetailsList.addAll(item.chapters.chaptersDetails)
+                }
+                PaalCard(mListItem, chapDetailsList.size, navController)
             }
-            PaalCard(mListItem, chapDetailsList.size, navController)
         }
     }
 }
@@ -85,8 +91,7 @@ fun IyalListScreen(
     }
     Column(modifier) {
         Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.background(Green80)
+            contentAlignment = Alignment.Center, modifier = Modifier.background(Green80)
         ) {
             Text(
                 text = paalName,
@@ -104,7 +109,7 @@ fun IyalListScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = 16.dp, start = 8.dp, end = 8.dp),
+                .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
@@ -145,8 +150,7 @@ fun AthikaramListScreen(
     }
     Column(modifier) {
         Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.background(Green80)
+            contentAlignment = Alignment.Center, modifier = Modifier.background(Green80)
         ) {
             Text(
                 text = iyalName,
@@ -164,7 +168,7 @@ fun AthikaramListScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = 16.dp, start = 8.dp, end = 8.dp),
+                .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
@@ -172,8 +176,7 @@ fun AthikaramListScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f),
-            contentPadding = PaddingValues(16.dp)
+                .weight(1f), contentPadding = PaddingValues(16.dp)
         ) {
             items(chapDetailsList) { item ->
                 val athikaram = "${item.name} / ${item.transliteration}"
@@ -181,14 +184,7 @@ fun AthikaramListScreen(
                 val start = item.start
                 val end = item.end
                 AthikaramCard(
-                    item,
-                    paalName,
-                    iyalName,
-                    athikaram,
-                    athikaramNumber,
-                    start,
-                    end,
-                    navController
+                    item, paalName, iyalName, athikaram, athikaramNumber, start, end, navController
                 )
             }
         }
@@ -205,14 +201,15 @@ fun ThirukuralListScreen(
     start: Int,
     end: Int,
     navController: NavHostController,
+    savedFavourites: UiState,
+    favListViewModel: FavListViewModel,
     modifier: Modifier = Modifier
 ) {
     val filteredList = mList.kural.subList(start - 1, end)
 
     Column(modifier) {
         Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.background(Green80)
+            contentAlignment = Alignment.Center, modifier = Modifier.background(Green80)
         ) {
             Text(
                 text = athikaramName,
@@ -230,7 +227,7 @@ fun ThirukuralListScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = 16.dp, start = 8.dp, end = 8.dp),
+                .padding(top = 16.dp, bottom = 14.dp, start = 8.dp, end = 8.dp),
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
@@ -238,17 +235,19 @@ fun ThirukuralListScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f),
-            contentPadding = PaddingValues(16.dp)
+                .weight(1f), contentPadding = PaddingValues(16.dp)
         ) {
-            items(filteredList) { item ->
+            items(items = filteredList, key = { item -> item.number }) { item ->
                 ThirukuralCard(
                     paalName,
                     iyalName,
                     athikaramName,
                     athikaramNumber,
                     item,
-                    navController
+                    true,
+                    navController,
+                    savedFavourites,
+                    favListViewModel
                 )
             }
         }
@@ -296,16 +295,89 @@ fun ThirukuralDetailsScreen(
                 fontWeight = FontWeight.Bold
             )
         }
+        SpannableText(paalName, iyalName, athikaramName)
+        ThirukuralDetailsCard(filteredList.first())
+    }
+}
+
+@Composable
+fun SpannableText(paalName: String, iyalName: String, athikaramName: String) {
+    val annotatedString = buildAnnotatedString {
+        withStyle(style = SpanStyle(LightBrown)) {
+            append("குறள் பால்:")
+        }
+        append(" $paalName\n")
+        withStyle(style = SpanStyle(LightBrown)) {
+            append("குறள் இயல்:")
+        }
+        append(" $iyalName\n")
+        withStyle(style = SpanStyle(LightBrown)) {
+            append("குறள் அதிகாரம்:")
+        }
+        append(" $athikaramName\n")
+    }
+    Text(
+        text = annotatedString,
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(top = 16.dp, start = 16.dp, end = 8.dp),
+        textAlign = TextAlign.Start,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Medium
+    )
+}
+
+@Composable
+fun FavKuralListScreen(
+    navController: NavHostController,
+    savedFavourites: UiState,
+    favListViewModel: FavListViewModel,
+    modifier: Modifier = Modifier
+) {
+
+    val mList = savedFavourites.favourites.kural
+    Column(modifier) {
         Text(
-            text = "குறள் பால்: $paalName\nகுறள் இயல்: $iyalName\nகுறள் அதிகாரம்: $athikaramName",
+            text = "பிடித்த திருக்குறள்கள்",
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = 16.dp, start = 16.dp, end = 8.dp),
-            textAlign = TextAlign.Start,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium
+                .padding(top = 16.dp, bottom = 14.dp, start = 8.dp, end = 8.dp),
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
         )
-        ThirukuralDetailsCard(filteredList.first())
+        if (mList.isNotEmpty()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth(), contentPadding = PaddingValues(16.dp)
+            ) {
+                items(items = mList, key = { item -> item.number }) { item ->
+                    ThirukuralCard(
+                        "",
+                        "",
+                        "",
+                        "",
+                        item,
+                        false,
+                        navController,
+                        savedFavourites,
+                        favListViewModel
+                    )
+                }
+            }
+        } else {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    text = "No favourites added yet!",
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
     }
 }

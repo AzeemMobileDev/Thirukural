@@ -29,14 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dev.azeem.thirukural.data.Thirukural
 import com.dev.azeem.thirukural.ui.theme.Green80
-import com.dev.azeem.thirukural.ui.theme.Green40
 
 @Composable
 fun ThirukuralDetailsCard(thirukural: Thirukural) {
     Column(
         Modifier
             .fillMaxSize()
-            .padding(top = 20.dp)
     ) {
         Card(
             modifier = Modifier
@@ -112,7 +110,7 @@ fun ThirukuralDetailsCard(thirukural: Thirukural) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "மு.வரதராசன் விளக்கம்",
+                        text = "மு.வரதராசன் விளக்கம் /\nExplanation by Mu. Varadarajan",
                         modifier = Modifier
                             .background(
                                 Green80,
@@ -129,7 +127,7 @@ fun ThirukuralDetailsCard(thirukural: Thirukural) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "சாலமன் பாப்பையா விளக்கம்",
+                        text = "சாலமன் பாப்பையா விளக்கம் /\nExplanation by Solomon Pappaiah",
                         modifier = Modifier
                             .background(
                                 Green80,
@@ -146,7 +144,7 @@ fun ThirukuralDetailsCard(thirukural: Thirukural) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "கலைஞர் மு.கருணாநிதி விளக்கம்",
+                        text = "கலைஞர் மு.கருணாநிதி விளக்கம் /\nExplanation by Kalaignar M. Karunanidhi",
                         modifier = Modifier
                             .background(
                                 Green80,
@@ -249,7 +247,7 @@ fun ThirukuralDetailsCardPreview() {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "மு.வரதராசன் விளக்கம்",
+                        text = "மு.வரதராசன் விளக்கம் /\nExplanation by Mu. Varadarajan",
                         modifier = Modifier
                             .background(
                                 Green80,
@@ -266,7 +264,7 @@ fun ThirukuralDetailsCardPreview() {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "சாலமன் பாப்பையா விளக்கம்",
+                        text = "சாலமன் பாப்பையா விளக்கம் /\nExplanation by Solomon Pappaiah",
                         modifier = Modifier
                             .background(
                                 Green80,
@@ -283,7 +281,7 @@ fun ThirukuralDetailsCardPreview() {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "கலைஞர் மு.கருணாநிதி விளக்கம்",
+                        text = "கலைஞர் மு.கருணாநிதி விளக்கம் /\nExplanation by Kalaignar M. Karunanidhi",
                         modifier = Modifier
                             .background(
                                 Green80,

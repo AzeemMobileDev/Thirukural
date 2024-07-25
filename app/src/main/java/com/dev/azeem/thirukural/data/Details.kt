@@ -11,6 +11,7 @@ data class Details(
         data class SectionDetail(
             val name: String,
             val transliteration: String,
+            val translation: String,
             val number: Int,
             val chapterGroup: ChapterGroup
         ) {

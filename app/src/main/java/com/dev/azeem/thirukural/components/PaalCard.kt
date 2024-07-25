@@ -63,6 +63,14 @@ fun PaalCard(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
+            Text(
+                text = sectionDetail.translation,
+                modifier = Modifier
+                    .padding(3.dp)
+                    .align(Alignment.CenterHorizontally),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.athikarangal, athikaramSize),

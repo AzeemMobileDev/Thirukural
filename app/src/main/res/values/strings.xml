@@ -2,4 +2,7 @@
     <string name="app_name">Thirukural</string>
     <string name="thirukural">திருக்குறள் / Thirukural</string>
     <string name="athikarangal">%1$s அதிகாரங்கள் / Chapters</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="about">About</string>
 </resources>

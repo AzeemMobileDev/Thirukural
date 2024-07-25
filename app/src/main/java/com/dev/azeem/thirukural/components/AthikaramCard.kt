@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -97,6 +98,12 @@ fun AthikaramCard(
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(3.dp)
                 )
+                Text(
+                    text = sectionDetail.translation,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(3.dp)
+                )
             }
             Column(modifier = Modifier.background(color = Green80)) {
                 Box(
@@ -107,7 +114,7 @@ fun AthikaramCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.KeyboardArrowRight,
+                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
                         contentDescription = "Next"
                     )
                 }
@@ -171,6 +178,12 @@ fun AthikaramPreview() {
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(3.dp)
                 )
+                Text(
+                    text = "Sample",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(3.dp)
+                )
             }
             Column(modifier = Modifier.background(color = Green80)) {
                 Box(
@@ -181,7 +194,7 @@ fun AthikaramPreview() {
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.KeyboardArrowRight,
+                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
                         contentDescription = "Next"
                     )
                 }

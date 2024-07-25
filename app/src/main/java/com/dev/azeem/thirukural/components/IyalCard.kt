@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,7 +35,6 @@ import com.dev.azeem.thirukural.AthikaramScreen
 import com.dev.azeem.thirukural.data.Details
 import com.dev.azeem.thirukural.ui.theme.Green80
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IyalCard(
     sectionDetail: Details.Section.SectionDetail.ChapterGroup.ChapterGroupDetail,
@@ -102,6 +102,12 @@ fun IyalCard(
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(3.dp)
                 )
+                Text(
+                    text = sectionDetail.translation,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(3.dp)
+                )
             }
             Column(modifier = Modifier.background(color = Green80)) {
                 Box(
@@ -112,7 +118,7 @@ fun IyalCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.KeyboardArrowRight,
+                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
                         contentDescription = "Next"
                     )
                 }
@@ -121,7 +127,6 @@ fun IyalCard(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun IyalPreview() {
@@ -176,6 +181,12 @@ fun IyalPreview() {
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(3.dp)
                 )
+                Text(
+                    text = "Sample",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(3.dp)
+                )
             }
             Column(modifier = Modifier.background(color = Green80)) {
                 Box(
@@ -186,7 +197,7 @@ fun IyalPreview() {
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.KeyboardArrowRight,
+                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
                         contentDescription = "Next"
                     )
                 }
