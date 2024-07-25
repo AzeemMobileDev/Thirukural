@@ -14,10 +14,8 @@
 - **UI Toolkit**: Jetpack Compose
 
 ## Screenshots
-<img src=assets/Thirukural_1.png width=320 height=680 />
-<img src=assets/Thirukural_2.png width=320 height=680 />
-<img src=assets/Thirukural_3.png width=320 height=680 />
-<img src=assets/Thirukural_4.png width=320 height=680 />
-<img src=assets/Thirukural_5.png width=320 height=680 />
-<img src=assets/Thirukural_6.png width=320 height=680 />
-<img src=assets/Thirukural_7.png width=320 height=680 />
+| Phone                                               | Foldable                                           | Tablet                                               |
+|-----------------------------------------------------|----------------------------------------------------|------------------------------------------------------|
+| <img src=assets/phone_1.png width=320 height=680 /> | <img src=assets/fold_1.png width=320 height=680 /> | <img src=assets/tablet_1.png width=320 height=680 /> |
+| <img src=assets/phone_2.png width=320 height=680 /> | <img src=assets/fold_2.png width=320 height=680 /> | <img src=assets/tablet_2.png width=320 height=680 /> |
+| <img src=assets/phone_3.png width=320 height=680 /> | <img src=assets/fold_3.png width=320 height=680 /> | <img src=assets/tablet_3.png width=320 height=680 /> |

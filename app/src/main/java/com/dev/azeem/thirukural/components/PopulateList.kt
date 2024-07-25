@@ -2,6 +2,7 @@ package com.dev.azeem.thirukural.components
 
 import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -29,10 +31,11 @@ import androidx.navigation.NavHostController
 import com.dev.azeem.thirukural.data.Details
 import com.dev.azeem.thirukural.data.FavListViewModel
 import com.dev.azeem.thirukural.data.Kural
-import com.dev.azeem.thirukural.data.Thirukural
 import com.dev.azeem.thirukural.data.UiState
+import com.dev.azeem.thirukural.ui.theme.DarkGreen
+import com.dev.azeem.thirukural.ui.theme.Green40
 import com.dev.azeem.thirukural.ui.theme.Green80
-import com.dev.azeem.thirukural.ui.theme.LightBrown
+import com.dev.azeem.thirukural.ui.theme.LightGreen
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -104,16 +107,18 @@ fun IyalListScreen(
                 fontWeight = FontWeight.Bold
             )
         }
-        Text(
-            text = "இயல்கள்",
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.background(Green40)) {
+            Text(
+                text = "இயல்கள்",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -163,16 +168,18 @@ fun AthikaramListScreen(
                 fontWeight = FontWeight.Bold
             )
         }
-        Text(
-            text = "அதிகாரங்கள்",
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.background(Green40)) {
+            Text(
+                text = "அதிகாரங்கள்",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -222,16 +229,18 @@ fun ThirukuralListScreen(
                 fontWeight = FontWeight.Bold
             )
         }
-        Text(
-            text = "திருக்குறள்கள்",
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 16.dp, bottom = 14.dp, start = 8.dp, end = 8.dp),
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.background(Green40)) {
+            Text(
+                text = "திருக்குறள்கள்",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -302,30 +311,33 @@ fun ThirukuralDetailsScreen(
 
 @Composable
 fun SpannableText(paalName: String, iyalName: String, athikaramName: String) {
+    val fontColor: Color = if (isSystemInDarkTheme()) LightGreen else DarkGreen
     val annotatedString = buildAnnotatedString {
-        withStyle(style = SpanStyle(LightBrown)) {
+        withStyle(style = SpanStyle(color = fontColor, fontWeight = FontWeight.Bold)) {
             append("குறள் பால்:")
         }
         append(" $paalName\n")
-        withStyle(style = SpanStyle(LightBrown)) {
+        withStyle(style = SpanStyle(color = fontColor, fontWeight = FontWeight.Bold)) {
             append("குறள் இயல்:")
         }
         append(" $iyalName\n")
-        withStyle(style = SpanStyle(LightBrown)) {
+        withStyle(style = SpanStyle(color = fontColor, fontWeight = FontWeight.Bold)) {
             append("குறள் அதிகாரம்:")
         }
         append(" $athikaramName\n")
     }
-    Text(
-        text = annotatedString,
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(top = 16.dp, start = 16.dp, end = 8.dp),
-        textAlign = TextAlign.Start,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Medium
-    )
+    Box(contentAlignment = Alignment.Center, modifier = Modifier.background(Green40)) {
+        Text(
+            text = annotatedString,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 16.dp, start = 16.dp, end = 8.dp),
+            textAlign = TextAlign.Start,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
 }
 
 @Composable
@@ -338,16 +350,18 @@ fun FavKuralListScreen(
 
     val mList = savedFavourites.favourites.kural
     Column(modifier) {
-        Text(
-            text = "பிடித்த திருக்குறள்கள்",
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 16.dp, bottom = 14.dp, start = 8.dp, end = 8.dp),
-            textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.background(Green40)) {
+            Text(
+                text = "பிடித்த திருக்குறள்கள்",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(top = 16.dp, bottom = 12.dp, start = 8.dp, end = 8.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
         if (mList.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier
@@ -370,7 +384,7 @@ fun FavKuralListScreen(
         } else {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = "No favourites added yet!",
+                    text = "No favorites added yet!",
                     modifier = Modifier
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center,

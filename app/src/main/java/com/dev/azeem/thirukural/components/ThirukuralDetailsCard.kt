@@ -17,6 +17,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +36,9 @@ fun ThirukuralDetailsCard(thirukural: Thirukural) {
     Column(
         Modifier
             .fillMaxSize()
+            .verticalScroll(
+                rememberScrollState()
+            )
     ) {
         Card(
             modifier = Modifier
@@ -83,13 +87,10 @@ fun ThirukuralDetailsCard(thirukural: Thirukural) {
                     fontStyle = FontStyle.Italic
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Green80)
+                HorizontalDivider(color = Green80)
                 Column(
                     Modifier
                         .padding(top = 4.dp, bottom = 4.dp, start = 6.dp, end = 6.dp)
-                        .verticalScroll(
-                            rememberScrollState()
-                        )
                 ) {
                     Spacer(modifier = Modifier.height(14.dp))
                     Text(

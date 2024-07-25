@@ -94,10 +94,13 @@ fun MainScreen(favListViewModel: FavListViewModel = viewModel(factory = FavListV
 
         val adaptiveInfo = currentWindowAdaptiveInfo()
         val layoutType = with(adaptiveInfo) {
-            if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
-                NavigationSuiteType.NavigationDrawer
-            } else {
-                NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(adaptiveInfo)
+            when (windowSizeClass.windowWidthSizeClass) {
+                WindowWidthSizeClass.EXPANDED -> {
+                    NavigationSuiteType.NavigationDrawer
+                }
+                else -> {
+                    NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(adaptiveInfo)
+                }
             }
         }
 
